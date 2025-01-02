@@ -1,35 +1,29 @@
-import { Icons } from '@/components/icons';
-
-export interface NavItem {
-  title: string;
-  url: string;
-  disabled?: boolean;
-  external?: boolean;
-  shortcut?: [string, string];
-  icon?: keyof typeof Icons;
-  label?: string;
-  description?: string;
-  isActive?: boolean;
-  items?: NavItem[];
+export interface Employee {
+  id: string;
+  name: string;
+  email: string;
+  phone: string;
+  position: string;
+  department: string;
+  created_at: Date;
+  updated_at: Date;
+  status: string;
+  photo_url: string;
 }
 
-export interface NavItemWithChildren extends NavItem {
-  items: NavItemWithChildren[];
+export type Membro = Employee;
+
+export interface Igreja {
+  id: string;
+  nome: string;
+  endereco: string;
+  telefone: string;
+  photo_url: string;
+  description: string;
+  created_at: Date;
+  updated_at: Date;
+  status: string;
+  category: string;
+  name: string;
+  price: number;
 }
-
-export interface NavItemWithOptionalChildren extends NavItem {
-  items?: NavItemWithChildren[];
-}
-
-export interface FooterItem {
-  title: string;
-  items: {
-    title: string;
-    href: string;
-    external?: boolean;
-  }[];
-}
-
-export type MainNavItem = NavItemWithOptionalChildren;
-
-export type SidebarNavItem = NavItemWithChildren;

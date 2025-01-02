@@ -24,32 +24,32 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 
 const formSchema = z.object({
-  name: z.string().min(2, {
-    message: 'Name must be at least 2 characters.'
+  nome: z.string().min(2, {
+    message: 'O nome deve ter pelo menos 2 caracteres.'
   }),
-  country: z.string({
-    required_error: 'Please select a country.'
+  cidade: z.string({
+    required_error: 'Por favor, selecione uma cidade.'
   }),
   email: z.string().email({
-    message: 'Please enter a valid email address.'
+    message: 'Por favor, insira um endereço de email válido.'
   }),
-  company: z.string().min(1, {
-    message: 'Company name is required.'
+  cargo: z.string().min(1, {
+    message: 'O cargo é obrigatório.'
   }),
-  gender: z.enum(['male', 'female', 'other'], {
-    required_error: 'Please select a gender.'
+  genero: z.enum(['masculino', 'feminino', 'outro'], {
+    required_error: 'Por favor, selecione um gênero.'
   })
 });
 
-export default function EmployeeForm() {
+export default function MemberForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: '',
-      country: '',
+      nome: '',
+      cidade: '',
       email: '',
-      company: '',
-      gender: undefined
+      cargo: '',
+      genero: undefined
     }
   });
 
@@ -61,7 +61,7 @@ export default function EmployeeForm() {
     <Card className="mx-auto w-full">
       <CardHeader>
         <CardTitle className="text-left text-2xl font-bold">
-          Employee Information
+          Informações do Membro
         </CardTitle>
       </CardHeader>
       <CardContent>
@@ -70,12 +70,12 @@ export default function EmployeeForm() {
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
               <FormField
                 control={form.control}
-                name="name"
+                name="nome"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Name</FormLabel>
+                    <FormLabel>Nome</FormLabel>
                     <FormControl>
-                      <Input placeholder="Enter your name" {...field} />
+                      <Input placeholder="Digite seu nome" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -83,25 +83,25 @@ export default function EmployeeForm() {
               />
               <FormField
                 control={form.control}
-                name="country"
+                name="cidade"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Country</FormLabel>
+                    <FormLabel>Cidade</FormLabel>
                     <Select onValueChange={field.onChange} value={field.value}>
                       <FormControl>
                         <SelectTrigger>
-                          <SelectValue placeholder="Select a country" />
+                          <SelectValue placeholder="Selecione uma cidade" />
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        <SelectItem value="usa">USA</SelectItem>
-                        <SelectItem value="uk">UK</SelectItem>
-                        <SelectItem value="canada">Canada</SelectItem>
-                        <SelectItem value="australia">Australia</SelectItem>
-                        <SelectItem value="germany">Germany</SelectItem>
-                        <SelectItem value="france">France</SelectItem>
-                        <SelectItem value="japan">Japan</SelectItem>
-                        <SelectItem value="brazil">Brazil</SelectItem>
+                        <SelectItem value="sao-paulo">São Paulo</SelectItem>
+                        <SelectItem value="rio-de-janeiro">Rio de Janeiro</SelectItem>
+                        <SelectItem value="belo-horizonte">Belo Horizonte</SelectItem>
+                        <SelectItem value="brasilia">Brasília</SelectItem>
+                        <SelectItem value="curitiba">Curitiba</SelectItem>
+                        <SelectItem value="salvador">Salvador</SelectItem>
+                        <SelectItem value="fortaleza">Fortaleza</SelectItem>
+                        <SelectItem value="recife">Recife</SelectItem>
                       </SelectContent>
                     </Select>
                     <FormMessage />
@@ -117,7 +117,7 @@ export default function EmployeeForm() {
                     <FormControl>
                       <Input
                         type="email"
-                        placeholder="Enter your email"
+                        placeholder="Digite seu email"
                         {...field}
                       />
                     </FormControl>
@@ -127,12 +127,12 @@ export default function EmployeeForm() {
               />
               <FormField
                 control={form.control}
-                name="company"
+                name="cargo"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Company</FormLabel>
+                    <FormLabel>Cargo</FormLabel>
                     <FormControl>
-                      <Input placeholder="Enter your company" {...field} />
+                      <Input placeholder="Digite seu cargo" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -141,10 +141,10 @@ export default function EmployeeForm() {
             </div>
             <FormField
               control={form.control}
-              name="gender"
+              name="genero"
               render={({ field }) => (
                 <FormItem className="space-y-3">
-                  <FormLabel>Gender</FormLabel>
+                  <FormLabel>Gênero</FormLabel>
                   <FormControl>
                     <RadioGroup
                       onValueChange={field.onChange}
@@ -153,21 +153,21 @@ export default function EmployeeForm() {
                     >
                       <FormItem className="flex items-center space-x-2">
                         <FormControl>
-                          <RadioGroupItem value="male" />
+                          <RadioGroupItem value="masculino" />
                         </FormControl>
-                        <FormLabel className="font-normal">Male</FormLabel>
+                        <FormLabel className="font-normal">Masculino</FormLabel>
                       </FormItem>
                       <FormItem className="flex items-center space-x-2">
                         <FormControl>
-                          <RadioGroupItem value="female" />
+                          <RadioGroupItem value="feminino" />
                         </FormControl>
-                        <FormLabel className="font-normal">Female</FormLabel>
+                        <FormLabel className="font-normal">Feminino</FormLabel>
                       </FormItem>
                       <FormItem className="flex items-center space-x-2">
                         <FormControl>
-                          <RadioGroupItem value="other" />
+                          <RadioGroupItem value="outro" />
                         </FormControl>
-                        <FormLabel className="font-normal">Other</FormLabel>
+                        <FormLabel className="font-normal">Outro</FormLabel>
                       </FormItem>
                     </RadioGroup>
                   </FormControl>
@@ -175,7 +175,7 @@ export default function EmployeeForm() {
                 </FormItem>
               )}
             />
-            <Button type="submit">Submit</Button>
+            <Button type="submit">Salvar</Button>
           </form>
         </Form>
       </CardContent>
